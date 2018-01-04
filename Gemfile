@@ -64,3 +64,5 @@ group :development, :test do
 end
 
 gem 'bootstrap-sass'
+gem 'font-awesome-sass', '~> 4.7.0'
+gem 'bootstrap-social-rails'
