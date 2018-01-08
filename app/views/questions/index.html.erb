@@ -1,0 +1,13 @@
+<h1 style="display:inline">All Questions</h1>
+<%= link_to "New Question", new_question_path, class: 'btn btn-success',\
+  style: "margin:5px 5px 20px 5px;" %>
+
+<% @questions.each do |q| %>
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= link_to q.title, q %>
+      </h4>
+    </div>
+  </div>
+<% end %>
