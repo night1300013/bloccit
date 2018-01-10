@@ -1,4 +1,3 @@
-require 'random_data'
 
 #Create Posts
 50.times do
