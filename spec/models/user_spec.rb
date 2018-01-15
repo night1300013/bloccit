@@ -35,4 +35,15 @@ RSpec.describe User, type: :model do
       expect(user_with_invalid_email).to_not be_valid
     end
   end
+
+  describe "format first name and last name" do
+    it "captializes first name and last name" do
+      user.save
+      expect(user.name).to eq "Bloccit User"
+
+      user.name = "bloccit user"
+      user.save
+      expect(user.name).to eq "Bloccit User"
+    end
+  end
 end
