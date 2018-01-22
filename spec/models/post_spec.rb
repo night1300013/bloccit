@@ -10,6 +10,7 @@ RSpec.describe Post, type: :model do
      password: "helloworld") }
   let(:post) { topic.posts.create!(title: title, body: body, user: user) }
 
+
   it { is_expected.to belong_to(:topic) }
   it { is_expected.to belong_to(:user) }
   it { is_expected.to have_many(:comments) }
@@ -71,6 +72,24 @@ RSpec.describe Post, type: :model do
         old_rank = post.rank
         post.votes.create!(value: -1, user: user)
         expect(post.rank).to eq (old_rank - 1)
+      end
+    end
+
+    describe "after_create callback" do
+      it "triggers create_vote on create" do
+        my_post = user.posts.new(title: title, body: body, topic: topic)
+        expect(my_post).to receive(:create_vote).at_least(:once)
+        my_post.save!
+      end
+
+      it "should set vote to one" do
+        my_post = topic.posts.create!(title: title, body: body, user: user)
+        expect(my_post.up_votes).to eq(1)
+      end
+
+      it "vote is belongs to user created it" do
+        my_post = user.posts.create!(title: title, body: body, topic: topic)
+        expect(my_post.votes.first.user).to eq(user)
       end
     end
   end
