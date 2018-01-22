@@ -28,11 +28,11 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+#    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
+#    @post = Post.find(params[:id])
     @post.assign_attributes(post_params)
 
     if @post.save
@@ -45,7 +45,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
+#    @post = Post.find(params[:id])
 
     if @post.destroy
       flash[:notice] = "\"#{@post.title}\" was deleted successfully."
@@ -62,20 +62,20 @@ class PostsController < ApplicationController
   end
 
   def authorize_user
-    post = Post.find(params[:id])
+    @post = Post.find(params[:id])
 
-    unless current_user == post.user || current_user.admin?
+    unless current_user == @post.user || current_user.admin?
       flash[:alert] = "You must be an admin to do that."
-      redirect_to [post.topic, post]
+      redirect_to [@post.topic, @post]
     end
   end
 
   def moderate_user
-    post = Post.find(params[:id])
+    @post = Post.find(params[:id])
 
-    unless current_user == post.user || current_user.admin? || current_user.moderator?
+    unless current_user == @post.user || current_user.admin? || current_user.moderator?
       flash[:alert] = "You much be an admin/author/moderator to do that."
-      redirect_to [post.topic, post]
+      redirect_to [@post.topic, @post]
     end
   end
 end
