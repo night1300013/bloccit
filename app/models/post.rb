@@ -33,6 +33,6 @@ class Post < ApplicationRecord
 
   private
   def create_vote
-    user.votes.create(value: 1, post: self)
+    votes.create(value: 1, user: user)
   end
 end
