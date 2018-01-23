@@ -35,7 +35,7 @@ class Post < ApplicationRecord
   private
 
   def favorite_post_and_send_emails
-    favorites.where(user: user).create!
+    Favorite.create(user: user, post: self)
     FavoriteMailer.new_post(user, self).deliver_now
   end
 end
