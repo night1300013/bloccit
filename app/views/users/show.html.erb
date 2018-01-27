@@ -25,15 +25,15 @@
 <% end %>
 
 <% if has_posts?(@user)%>
-  <br>
-  <br>
-  <h4>
-    <%= "#{@user.name} has not submitted any post or comment yet." %>
-  </h4>
-<% else %>
   <h2>Posts</h2>
   <%= render @user.posts %>
 
   <h2>Comments</h2>
   <%= render @user.comments %>
+<% else %>
+  <br>
+  <br>
+  <h4>
+    <%= "#{@user.name} has not submitted any post or comment yet." %>
+  </h4>
 <% end %>
