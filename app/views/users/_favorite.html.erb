@@ -1,15 +1,13 @@
 <div class="media">
-  <% f_post = favorite_post(favorite) %>
-  <%= render partial: 'votes/voting', locals: { post: f_post} %>
+  <%= render partial: 'votes/voting', locals: { post: favorite.post} %>
   <div class="media-body">
     <h4 class="media-heading">
-      <%= link_to favorite.post.title, topic_post_path(f_post.topic, f_post)%>
+      <%= link_to favorite.post.title, topic_post_path(favorite.post_topic, favorite.post)%>
     </h4>
     <h5>
-      <% f_user = favorite_user(favorite) %>
-      <%= image_tag f_user.avatar_url(48) %> :
-      <%= pluralize(f_user.votes.count, "vote") %> &
-      <%= pluralize(f_user.comments.count, "comment") %>
+      <%= image_tag favorite.post_user.avatar_url(48) %> :
+      <%= pluralize(favorite.post_user.votes.count, "vote") %> &
+      <%= pluralize(favorite.post_user.comments.count, "comment") %>
     </h5>
   </div>
 </div>
